@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/NorteTabacosFront/static/css/main.e6348259.chunk.css",
+    "main.js": "/NorteTabacosFront/static/js/main.512833cc.chunk.js",
+    "main.js.map": "/NorteTabacosFront/static/js/main.512833cc.chunk.js.map",
+    "runtime-main.js": "/NorteTabacosFront/static/js/runtime-main.35039ed5.js",
+    "runtime-main.js.map": "/NorteTabacosFront/static/js/runtime-main.35039ed5.js.map",
+    "static/js/2.38bb5e80.chunk.js": "/NorteTabacosFront/static/js/2.38bb5e80.chunk.js",
+    "static/js/2.38bb5e80.chunk.js.map": "/NorteTabacosFront/static/js/2.38bb5e80.chunk.js.map",
+    "static/js/3.60d3b8b4.chunk.js": "/NorteTabacosFront/static/js/3.60d3b8b4.chunk.js",
+    "static/js/3.60d3b8b4.chunk.js.map": "/NorteTabacosFront/static/js/3.60d3b8b4.chunk.js.map",
+    "index.html": "/NorteTabacosFront/index.html",
+    "static/css/main.e6348259.chunk.css.map": "/NorteTabacosFront/static/css/main.e6348259.chunk.css.map",
+    "static/js/2.38bb5e80.chunk.js.LICENSE.txt": "/NorteTabacosFront/static/js/2.38bb5e80.chunk.js.LICENSE.txt",
+    "static/media/Logo.1fe34be8.jpg": "/NorteTabacosFront/static/media/Logo.1fe34be8.jpg",
+    "static/media/boxer@3x.png": "/NorteTabacosFront/static/media/boxer@3x.e9cc46c8.png",
+    "static/media/liverpool@3x.png": "/NorteTabacosFront/static/media/liverpool@3x.024a01e5.png",
+    "static/media/master@3x.png": "/NorteTabacosFront/static/media/master@3x.bcb38b30.png",
+    "static/media/melbourne.jpg": "/NorteTabacosFront/static/media/melbourne.44bc0dad.jpg",
+    "static/media/milenio.jpg": "/NorteTabacosFront/static/media/milenio.9c8daa3a.jpg",
+    "static/media/pier@3x.png": "/NorteTabacosFront/static/media/pier@3x.30e53e56.png",
+    "static/media/redpoint@3x.png": "/NorteTabacosFront/static/media/redpoint@3x.5243524e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.35039ed5.js",
+    "static/js/2.38bb5e80.chunk.js",
+    "static/css/main.e6348259.chunk.css",
+    "static/js/main.512833cc.chunk.js"
+  ]
+}

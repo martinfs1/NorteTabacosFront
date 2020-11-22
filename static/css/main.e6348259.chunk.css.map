@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,SACC,cAAgB,CAChB,eAED","file":"main.e6348259.chunk.css","sourcesContent":[".imgLogo{\r\n max-width:  20vw;\r\n max-height: 15vh;\r\n /* object-fit: cover;  */\r\n}\r\n\r\n\r\n"]}

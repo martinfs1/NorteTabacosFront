@@ -8,6 +8,7 @@ const CigarrillosPage = () => {
 
   const [modalDatos, setModalDatos] = React.useState();
   const [dataMessage, setDataMessage] = React.useState({});
+  const [cardCigarros, setCardCigarros] = React.useState(); 
 
   const formContact = React.useRef();
 
@@ -49,11 +50,17 @@ const CigarrillosPage = () => {
       ))
   }
 
+  React.useEffect(() => {
+    setCardCigarros(<CardsCigarrillo />)
+  }, [])
+
+  console.log(cardCigarros);
+
   return (
     <>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 row-cols-sm-2 justify-content-center pt-4 m-0">
-          <CardsCigarrillo />
+          {cardCigarros}
         </div>
         <div className="modal fade " id={`modal${modalDatos && modalDatos.indice}`} tabindice="-1" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered modal-">

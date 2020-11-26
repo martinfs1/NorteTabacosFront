@@ -14,6 +14,7 @@ export const CardFuegoArtificial = (props) => {
     modal()
   }, [props])
 
+  console.log(datos);
 
   return (
     <>

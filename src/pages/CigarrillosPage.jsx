@@ -1,55 +1,52 @@
-import React from 'react'
-import App from '../../src/App.css'
-import CardCigarrillo from '../components/CardCigarrillo'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import dataCard from '../utils/dataCards';
+import clienteAxios from '../utils/clienteAxios';
+import Swal from 'sweetalert2';
 
 const CigarrillosPage = () => {
 
-  const Cigarrillos = {
-    producto: [{
-      marca: "Melbourne",
-      img: require("../img/cigarrillos/melbourne.jpg"),
-      description: "Disponible en sus versiones - Red - Mint - Blue",
-      descriptionModal: "Melbourne con un nuevo diseño, más moderno y atractivo, Introduce nuevos estándares de calidad en el mercado nacional."
-    },
-    {
-      marca: "Milenio",
-      img: require("../img/cigarrillos/milenio.jpg"),
-      description: "Disponible en sus versiones - Red - Click - Mint - Gold",
-      descriptionModal: "Milenio una propuesta más, elegante y refinada, en sus sabores full flavour y mild flavour."
-    },
-    {
-      marca: "Master",
-      img: require("../img/cigarrillos/master@3x.png"),
-      description: "Disponible en su version - Rubio Master Filters King Size 20",
-      descriptionModal: "Un muy buen cigarrillo rubio a un excelente precio"
-    },
-    {
-      marca: "Red Point",
-      img: require("../img/cigarrillos/redpoint@3x.png"),
-      description: "Disponible en sus versiones - Blue - Menthol - On",
-      descriptionModal: "Nuestra marca de cigarrillos líder y ampliamente reconocida en todo el país. Con un blend joven, creado para quienes saben disfrutar de lo que les gusta,compartiéndolo con amigos o -incluso- con ellos mismos. Calidad internacional producida en Argentina "
-    },
-    {
-      marca: "Pier",
-      img: require("../img/cigarrillos/pier@3x.png"),
-      description: "Disponible en sus versiones - Original Blend y Menthol",
-      descriptionModal: "Es un cigarrillo joven, audaz, innovador, para gente que le gusta descubrir nuevos horizontes. Un cigarrillo con cuerpo que permite disfrutar del sabor de un blend suave y fiel."
-    },
-    {
-      marca: "Boxer",
-      img: require("../img/cigarrillos/boxer@3x.png"),
-      description: "Disponible en sus versiones - Clásico - Menthol - Suave",
-      descriptionModal: "Sofisticado, con la madurez necesaria para crear un blend diferente, con un sabor único para un público que sabe lo que quiere."
-    },
-    {
-      marca: "Liverpool",
-      img: require("../img/cigarrillos/liverpool@3x.png"),
-      description: "Disponible en sus versiones - Red - Blue - Menthol",
-      descriptionModal: "Liverpool, a traves de sus variables, presenta una experiencia amplia y diferente para cada exigencia personalizada."
-    }]
+  const [modalDatos, setModalDatos] = React.useState();
+  const [dataMessage, setDataMessage] = React.useState({});
+
+  const formContact = React.useRef();
+
+  const modal = (datos, indice) => {
+    setModalDatos({ ...modalDatos, datos, indice });
+    setDataMessage({ ...dataMessage, product: datos.marca });
   }
 
-  const cardsCigarrillo = Cigarrillos.producto.map((c, i) => <CardCigarrillo data={c} index={i} key={i}/>)
+  const formReset = () => {
+    dataMessage && setDataMessage({...dataMessage, nameClient: '', cellNumber: '', message: ''});
+  }
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    try {
+      await clienteAxios.post('api/v1/send', dataMessage);
+      formReset();
+      Swal.fire({
+        icon: 'success',
+        title: 'Envio Exitoso. Pronto responderemos tu consulta',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const cardsCigarrillo = dataCard.cigarros.map((c, i) =>
+    <Link onClick={() => modal(c, i)} className="col mb-4 text-dark" type="button" data-toggle="modal" data-target={`#modal${i}`}>
+      <div className="card h-100 ">
+        <img src={c.img.default} className="card-img-top img-fluid" alt={c.marca} />
+        <div className="card-body">
+          <h5 className="card-title">{c.marca}</h5>
+          <p className="card-text">{c.description}</p>
+        </div>
+      </div>
+    </Link>
+  )
+
+  console.log(dataMessage);
 
   return (
     <>
@@ -57,9 +54,84 @@ const CigarrillosPage = () => {
         <div className="row row-cols-1 row-cols-md-3 row-cols-sm-2 justify-content-center pt-4 m-0">
           {cardsCigarrillo}
         </div>
+        <div className="modal fade " id={`modal${modalDatos && modalDatos.indice}`} tabindice="-1" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">{modalDatos && modalDatos.datos.marca}</h5>
+              <button type="button" className="close" onClick={formReset} data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <img src={modalDatos && modalDatos.datos.img.default} className="card-img-top" alt="..." />
+              <div className="row pt-2">
+                <div className="col-12 col-sm-3 ">
+                  <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a className="nav-link active text-center" id={`v-pills-home-tab${modalDatos && modalDatos.indice}`} data-toggle="pill" data-target={`#v-pills-home${modalDatos && modalDatos.indice}`} role="tab" aria-controls={`v-pills-home${modalDatos && modalDatos.indice}`} aria-selected="true" >Info</a>
+                    <a className="nav-link text-center" id={`v-pills-profile-tab${modalDatos && modalDatos.indice}`} data-toggle="pill" data-target={`#v-pills-profile${modalDatos && modalDatos.indice}`} role="tab" aria-controls={`v-pills-profile${modalDatos && modalDatos.indice}`} aria-selected="false">Contacto</a>
+                  </div>
+                </div>
+
+                <div className="col-12 col-sm-9">
+                  <div className="tab-content" id="v-pills-tabContent">
+                    <div className="tab-pane fade show active" id={`v-pills-home${modalDatos && modalDatos.indice}`} role="tabpanel" aria-labelledby={`v-pills-home-tab${modalDatos && modalDatos.indice}`}>
+                      <p>{modalDatos && modalDatos.datos.descriptionModal}
+                      </p>
+                    </div>
+
+                    <div className="tab-pane fade" id={`v-pills-profile${modalDatos && modalDatos.indice}`} role="tabpanel" aria-labelledby={`v-pills-profile-tab${modalDatos && modalDatos.indice}`}>
+                      <form className="pt-2" ref={formContact}>
+                        <div className="form-row">
+                          <div className="form-group col-md-6">
+                            <input
+                              type="text"
+                              name='nameClient'
+                              maxLength='32'
+                              value={dataMessage && dataMessage.nameClient}
+                              onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                              id="nombre"
+                              className="form-control"
+                              placeholder='Nombre Completo' />
+                          </div>
+                          <div className="form-group col-md-6">
+                            <input
+                              type="number"
+                              className="form-control"
+                              id="cellphone"
+                              placeholder='Numero de teléfono'
+                              name="cellNumber"
+                              value={dataMessage && dataMessage.cellNumber}
+                              onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <textarea
+                            className="form-control"
+                            id="message-text"
+                            placeholder='Consulta:'
+                            name="message"
+                            value={dataMessage && dataMessage.message}
+                            onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                          ></textarea>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={formReset}>Cerrar</button>
+              <button type="submit" className="btn btn-primary" onClick={sendMessage}>Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </>
   )
 }
 
-export default CigarrillosPage
+export default CigarrillosPage;

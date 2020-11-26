@@ -1,246 +1,137 @@
-import React from 'react'
-import { CardFuegoArtificial } from '../components/CardFuegoArtificial'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import dataCards from '../utils/dataCards';
+import clienteAxios from '../utils/clienteAxios';
+import Swal from 'sweetalert2';
 
-const FuegosAPage = (props) => {
+const FuegosAPage = () => {
 
-  const FuegosArtificiales = {
-    producto: [
-      {
-        title: "Giratorio 6 Chisperos F6660",
-        img: require("../img/FuegosA/giratorio6chisperos-F6660.png"),
-        description: "100x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Avion Nocturno F6600",
-        img: require("../img/FuegosA/avionNocturno-F6600.png"),
-        description: "120x6",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Ovni Dancing New F9990",
-        img: require("../img/FuegosA/ovniDancingNew-F9990.png"),
-        description: "20x12x6",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Mariposas F6610",
-        img: require("../img/FuegosA/mariposas-F6610.png"),
-        description: "120x6",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Remolino de Luces F6636",
-        img: require("../img/FuegosA/remolinoLuces-F6636.png"),
-        description: "200x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Bomba Color Tornado F8817",
-        img: require("../img/FuegosA/bombaColorTornado-F8817.png"),
-        description: "36x6",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Giratorio Abejitas F9910",
-        img: require("../img/FuegosA/giratorioAbejitasTornado-F9910.png"),
-        description: "300x12",
-        descriptionModal: "Batería de mano"
-      },
+  const [modalDatos, setModalDatos] = React.useState();
+  const [dataMessage, setDataMessage] = React.useState({});
 
-      {
-        title: "Magnum II F3344",
-        img: require("../img/FuegosA/magnumII-f3344.png"),
-        description: "36x2",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Magnum F3347",
-        img: require("../img/FuegosA/magnum-F3347.png"),
-        description: "72x3 54x4",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Magic Colours F3336",
-        img: require("../img/FuegosA/magicColours-F3336.png"),
-        description: "72x6",
-        descriptionModal: "Batería de mano"
+  const formContact = React.useRef();
 
-      },
-      {
-        title: "Super Fantasia F3394",
-        img: require("../img/FuegosA/superFantasia-F3394.png"),
-        description: "96x1",
-        descriptionModal: "Caña voladora con luces"
-      },
-      {
-        title: "Caña Bomba F3357",
-        img: require("../img/FuegosA/cañaBomba-F3357.png"),
-        description: "36x6",
-        descriptionModal: "Caña voladora con luces"
-      },
-      {
-        title: "Bengalita 3 Colores F2201",
-        img: require("../img/FuegosA/bengalita-F2201.jpg"),
-        description: "40x10x5",
-        descriptionModal: "Bengala de mano"
-      },
-      {
-        title: "Estrellita F2257",
-        img: require("../img/FuegosA/estrellita-F2257-150.jpg"),
-        description: "150x10x5",
-        descriptionModal: "Estrellita de mano"
-      },
-      {
-        title: "Candela chica de interior F2254",
-        img: require("../img/FuegosA/candelaChica-F2254.jpg"),
-        description: "16x10x4",
-        descriptionModal: "Candela chica de interior"
-      },
-      {
-        title: "Estallo nuevo boom f9935",
-        img: require("../img/FuegosA/nuevoBoom-f9935.jpg"),
-        description: "50x40x10",
-        descriptionModal: "Estallo nuevo boom"
-      },
-      {
-        title: "Estrellita F2257",
-        img: require("../img/FuegosA/estrellita-f2257jpg.jpg"),
-        description: "15x100x5",
-        descriptionModal: "Estrellita"
-      },
-      {
-        title: "Huevo de dragon F9920",
-        img: require("../img/FuegosA/huevoDragon-f9920.png"),
-        description: "50x24x5 - 100x12x5",
-        descriptionModal: "Huevo de dragon"
-      },
-      {
-        title: "Botellita de champagne F9970",
-        img: require("../img/FuegosA/botellitaChampagneF9970.png"),
-        description: "100x12",
-        descriptionModal: "Botellita de champagne"
-      },
-      {
-        title: "Globo Aerostático F9995",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "100x1",
-        descriptionModal: "Globo Aerostático"
-      },
-      {
-        title: "Colita de dragon F9960",
-        img: require("../img/FuegosA/colitaDragon-F9960.jpg"),
-        description: "12x50x40",
-        descriptionModal: "Colita de dragon"
-      },
-      {
-        title: "Batería F1190",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "20x40x14",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Batería F1190",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "40x40x14",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Batería en Rollo F1195",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "4x5x500",
-        descriptionModal: "Batería de piso"
-      },
-      {
-        title: "Fósforo F1101",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "80x40x5, 80x40x6, 50x40x8",
-        descriptionModal: "Fósforo de mano"
-      },
-      {
-        title: "Trompito Luminoso F1103",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "60x40x5",
-        descriptionModal: "Trompito de mano"
-      },
-      {
-        title: "Fuente LLuvia Celestial F5506",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "77x2",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Infierno Rojo F5507",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "20x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Ala Giratoria 3 Chisperos F6630",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "24X12",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Bomba de Estruendo T1 TU8812",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "120x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Bomba de Estruendo T1 1/2 TU8813",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "60x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Bomba de Estruendo T2 TU8814",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "48x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Base Misil 100 Tiros F4490",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "30x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Base Misil 50 Tiros F4450",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "60x1",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Base Misil 25 Tiros F4425",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "30x4",
-        descriptionModal: "Batería de mano"
+  const modal = (datos, indice) => {
+    setModalDatos({ ...modalDatos, datos, indice });
+    setDataMessage({ ...dataMessage, product: datos.title });
 
-      },
-      {
-        title: "Base Misil 16 Tiros F4416",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "45x4",
-        descriptionModal: "Batería de mano"
-      },
-      {
-        title: "Titanic Rocket F3348",
-        img: require("../img/FuegosA/fuegoLandia.png"),
-        description: "24x6",
-        descriptionModal: "Caña voladora con luces"
-      },
-    ]
   }
 
-  const cardsFuegoArtificial = FuegosArtificiales.producto.map((f, i) => <CardFuegoArtificial data={f} key={i} index={i} />)
+  const formReset = () => {
+    dataMessage && setDataMessage({...dataMessage, nameClient: '', cellNumber: '', message: ''});
+  }
 
+  const sendForm = async (e) => {
+    e.preventDefault()
+    try {
+      await clienteAxios.post('/api/v1/send', dataMessage)
+      Swal.fire({
+        icon: 'success',
+        title: 'Envio Exitoso. Pronto responderemos tu consulta',
+      });
+      formReset();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  console.log(modalDatos);
+
+  const cardsFuegoArtificial = dataCards.FuegosArtificiales.map((f, i) =>
+    <Link onClick={() => modal(f, i)} className="col mb-4 text-dark" type="button" data-toggle="modal" data-target={`#modal${i}`}>
+      <div className="card h-100 ">
+        <img src={f.img.default} className="card-img-top img-fluid" alt={f.title} />
+        <div className="card-body">
+          <h5 className="card-title">{f.title}</h5>
+          <p className="card-text">{f.description}</p>
+        </div>
+      </div>
+    </Link>
+  )
+
+  console.log(dataMessage);
 
   return (
     <div className="container">
       <div className="row row-cols-1 row-cols-md-3 row-cols-sm-2 justify-content-center pt-4 m-0">
         {cardsFuegoArtificial}
       </div>
+      <div className="modal fade " id={`modal${modalDatos && modalDatos.indice}`} tabindice="-1" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">{modalDatos && modalDatos.marca}</h5>
+              <button type="button" className="close" onClick={formReset} data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <img src={modalDatos && modalDatos.datos.img.default} className="card-img-top" alt="..." />
+              <div className="row pt-2">
+                <div className="col-12 col-sm-3 ">
+                  <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a className="nav-link active text-center" id={`v-pills-home-tab${modalDatos && modalDatos.indice}`} data-toggle="pill" data-target={`#v-pills-home${modalDatos && modalDatos.indice}`} role="tab" aria-controls={`v-pills-home${modalDatos && modalDatos.indice}`} aria-selected="true" >Info</a>
+                    <a className="nav-link text-center" id={`v-pills-profile-tab${modalDatos && modalDatos.indice}`} data-toggle="pill" data-target={`#v-pills-profile${modalDatos && modalDatos.indice}`} role="tab" aria-controls={`v-pills-profile${modalDatos && modalDatos.indice}`} aria-selected="false">Contacto</a>
+                  </div>
+                </div>
+
+                <div className="col-12 col-sm-9">
+                  <div className="tab-content" id="v-pills-tabContent">
+                    <div className="tab-pane fade show active" id={`v-pills-home${modalDatos && modalDatos.indice}`} role="tabpanel" aria-labelledby={`v-pills-home-tab${modalDatos && modalDatos.indice}`}>
+                      <p>{modalDatos && modalDatos.datos.descriptionModal}
+                      </p>
+                    </div>
+
+                    <div className="tab-pane fade" id={`v-pills-profile${modalDatos && modalDatos.indice}`} role="tabpanel" aria-labelledby={`v-pills-profile-tab${modalDatos && modalDatos.indice}`}>
+                      <form className="pt-2" ref={formContact}>
+                        <div className="form-row">
+                          <div className="form-group col-md-6">
+                            <input
+                              type="text"
+                              name='nameClient'
+                              maxLength='32'
+                              value={dataMessage && dataMessage.nameClient}
+                              onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                              id="nombre"
+                              className="form-control"
+                              placeholder='Nombre Completo' />
+                          </div>
+                          <div className="form-group col-md-6">
+                            <input
+                              type="number"
+                              className="form-control"
+                              id="cellNumber"
+                              placeholder='Numero de teléfono'
+                              name="cellNumber"
+                              value={dataMessage && dataMessage.cellNumber}
+                              onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <textarea
+                            className="form-control"
+                            id="message-text"
+                            placeholder='Consulta:'
+                            name="message"
+                            value={dataMessage && dataMessage.message}
+                            onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                          ></textarea>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={formReset}>Cerrar</button>
+              <button type="submit" className="btn btn-primary" onClick={sendForm}>Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }

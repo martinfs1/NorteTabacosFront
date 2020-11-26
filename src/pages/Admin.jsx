@@ -6,6 +6,8 @@ const Admin = () => {
 
   const [consultasData, setConsultasData] = React.useState([]);
   const [dataModal, setDataModal] = React.useState();
+  
+  const cerrarModal = React.useRef();
 
   const getContactsHandler = async (req, res) => {
     try {
@@ -16,8 +18,6 @@ const Admin = () => {
     }
   }
 
-  console.log(consultasData);
-
   const infoMessage = (props) => {
     setDataModal(props);
   }
@@ -25,11 +25,12 @@ const Admin = () => {
   const changeStateReadHandler = async (props) => {
     try {
       dataModal.read ?
-       await clienteAxios.put(`api/v1/message/${props}`, {read: false})
-      :
-       await clienteAxios.put(`api/v1/message/${props}`, {read: true});
+        await clienteAxios.put(`api/v1/message/${props}`, { read: false })
+        :
+        await clienteAxios.put(`api/v1/message/${props}`, { read: true });
 
-       getContactsHandler()
+      getContactsHandler();
+      cerrarModal.current.click();
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +42,7 @@ const Admin = () => {
         <div class="card mx-2 my-2 text-black col-10" onClick={() => infoMessage(c)}>
           <Link className="text-black text-decoration-none" data-toggle="modal" data-target="#modalConsultas">
             <div class="card-body py-1">
-              <h4 className="card-title text-dark text-nowrap mb-0">Tienes un mensaje sin leer<span><i class="fas fa-check text-warning ml-2"></i> </span></h4>
+              <h4 className="card-title text-dark text-nowrap mb-0">Tienes un nuevo mensaje<span><i class="fas fa-check text-warning ml-2"></i> </span></h4>
             </div>
           </Link>
         </div>)
@@ -54,7 +55,7 @@ const Admin = () => {
         <div class="card mx-2 my-2 text-black col-10" onClick={() => infoMessage(c)}>
           <Link className="text-black text-decoration-none" data-toggle="modal" data-target="#modalConsultas">
             <div class="card-body py-1">
-              <h4 className="card-title text-dark text-nowrap mb-0">Tienes un mensaje sin leer<span><i class="fas fa-check-double text-success ml-2"></i> </span></h4>
+              <h4 className="card-title text-dark text-nowrap mb-0">Mensajes leídos<span><i class="fas fa-check-double text-success ml-2"></i> </span></h4>
             </div>
           </Link>
         </div>)
@@ -99,8 +100,8 @@ const Admin = () => {
               <p className="mb-0">Mensaje: {dataModal && dataModal.message}</p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-  <button type="button" className="btn btn-primary" onClick={() => changeStateReadHandler(dataModal && dataModal._id)}>Marcar como {dataModal.read && "No"} Leida</button>
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" ref={cerrarModal} >Cerrar</button>
+              <button type="button" className="btn btn-primary" onClick={() => changeStateReadHandler(dataModal && dataModal._id)}>Marcar como {dataModal && dataModal.read && "No"} Leida</button>
             </div>
           </div>
         </div>

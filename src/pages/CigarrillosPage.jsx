@@ -34,7 +34,9 @@ const CigarrillosPage = () => {
     }
   }
 
-  const cardsCigarrillo = dataCard.cigarros.map((c, i) =>
+  const CardsCigarrillo = () => {
+    return(
+      dataCard.cigarros.map((c, i) =>
     <Link onClick={() => modal(c, i)} className="col mb-4 text-dark" type="button" data-toggle="modal" data-target={`#modal${i}`}>
       <div className="card h-100 ">
         <img src={c.img.default} className="card-img-top img-fluid" alt={c.marca} />
@@ -44,15 +46,14 @@ const CigarrillosPage = () => {
         </div>
       </div>
     </Link>
-  )
-
-  console.log(dataMessage);
+    ))
+  }
 
   return (
     <>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 row-cols-sm-2 justify-content-center pt-4 m-0">
-          {cardsCigarrillo}
+          <CardsCigarrillo />
         </div>
         <div className="modal fade " id={`modal${modalDatos && modalDatos.indice}`} tabindice="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-">

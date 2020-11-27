@@ -8,7 +8,7 @@ const CigarrillosPage = () => {
 
   const [modalDatos, setModalDatos] = React.useState();
   const [dataMessage, setDataMessage] = React.useState({});
-  const [cardCigarros, setCardCigarros] = React.useState(); 
+  const [cardCigarros, setCardCigarros] = React.useState();
 
   const formContact = React.useRef();
 
@@ -59,6 +59,9 @@ const CigarrillosPage = () => {
   return (
     <>
       <div className="container">
+        <h1 className="text-center pt-3">Norte Tabaco</h1>
+        <hr />
+        <h3 className="text-center pt-4 ">Somos lideres en venta mayorista de cigarrillos en todo el país. Déjanos tu consulta por cualquier producto y mejoramos cualquier precio que hayas escuchado. También recuerda que puedes dejarnos tus datos de contacto para que nosotros nos contactemos contigo.</h3>
         <div className="row row-cols-1 row-cols-md-3 row-cols-sm-2 justify-content-center pt-4 m-0">
           {cardCigarros}
         </div>

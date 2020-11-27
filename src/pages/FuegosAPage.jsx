@@ -18,7 +18,7 @@ const FuegosAPage = () => {
   }
 
   const formReset = () => {
-    dataMessage && setDataMessage({...dataMessage, nameClient: '', cellNumber: '', message: ''});
+    dataMessage && setDataMessage({ ...dataMessage, nameClient: '', cellNumber: '', message: '' });
   }
 
   const sendForm = async (e) => {
@@ -53,6 +53,9 @@ const FuegosAPage = () => {
 
   return (
     <div className="container">
+      <h1 className="text-center pt-3">Norte Tabaco</h1>
+      <hr />
+      <h3 className="text-center pt-4 ">Somos lideres en venta mayorista de fuegos artificiales en todo el país. Déjanos tu consulta por cualquier producto y mejoramos cualquier precio que hayas escuchado. También recuerda que puedes dejarnos tus datos de contacto para que nosotros nos contactemos contigo.</h3>
       <div className="row row-cols-1 row-cols-md-3 row-cols-sm-2 justify-content-center pt-4 m-0">
         {cardsFuegoArtificial}
       </div>
@@ -91,7 +94,7 @@ const FuegosAPage = () => {
                               name='nameClient'
                               maxLength='32'
                               value={dataMessage && dataMessage.nameClient}
-                              onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                              onChange={e => setDataMessage({ ...dataMessage, [e.target.name]: e.target.value })}
                               id="nombre"
                               className="form-control"
                               placeholder='Nombre Completo' />
@@ -104,7 +107,7 @@ const FuegosAPage = () => {
                               placeholder='Numero de teléfono'
                               name="cellNumber"
                               value={dataMessage && dataMessage.cellNumber}
-                              onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                              onChange={e => setDataMessage({ ...dataMessage, [e.target.name]: e.target.value })}
                             />
                           </div>
                         </div>
@@ -115,7 +118,7 @@ const FuegosAPage = () => {
                             placeholder='Consulta:'
                             name="message"
                             value={dataMessage && dataMessage.message}
-                            onChange={e => setDataMessage({...dataMessage, [e.target.name]: e.target.value})}
+                            onChange={e => setDataMessage({ ...dataMessage, [e.target.name]: e.target.value })}
                           ></textarea>
                         </div>
                       </form>

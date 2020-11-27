@@ -17,10 +17,10 @@ const NavBar = (props) => {
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <Link className="nav-link text-white" to="/">Inicio <span className="sr-only">(current)</span></Link>
+              <Link className="nav-link text-white" to="/NorteTabacosFront">Inicio <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/fa">Fuegos Artificiales</Link>
+              <Link className="nav-link text-white" to="/fuegos-artificiales">Fuegos Artificiales</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/">Nosotros</Link>

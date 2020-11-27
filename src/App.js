@@ -13,7 +13,7 @@ function App() {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact={true} path="/fa" component={FuegosAPage} />
+          <Route exact={true} path="/fuegos-artificiales" component={FuegosAPage} />
           <Route exact={true} path="/admin" component={Admin} />
           <Route exact={true} path="/NorteTabacosFront" component={CigarrillosPage} />
         </Switch>
